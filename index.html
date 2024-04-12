@@ -1,44 +1,51 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>1 Ano de Namoro</title>
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <h1>1 ANO DE NAMORO EM:</h1>
-    <div class="countdown-container">
-      <div class="countdown-el days-c">
-        <p class="text" id="days">0</p>
-        <span>dias</span>
-      </div>
-      <div class="countdown-el hours-c">
-        <p class="text" id="hours">0</p>
-        <span>horas</span>
-      </div>
-      <div class="countdown-el mins-c">
-        <p class="text" id="mins">0</p>
-        <span>minutos</span>
-      </div>
-      <div class="countdown-el seconds-c">
-        <p class="text" id="seconds">0</p>
-        <span>segundos</span>
-      </div>
-    </div>
-    <footer>
-      <div class="rodape">
-        <p>Projeto feito por: Gabriel Nunes</p>
-        <p>Para minha amada: Clauryan Arch</p>
-      </div>
-    </footer>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Countdown Timer</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+    #countdown {
+        font-size: 2em;
+        margin-top: 50px;
+    }
+</style>
+</head>
+<body>
 
-    <script src="/js/script.js"></script>
-  </body>
+<h1>Countdown Timer</h1>
+<p>Tempo restante até 24 de abril de 2024:</p>
+<div id="countdown"></div>
+
+<script>
+// Definindo a data alvo
+const targetDate = new Date('2024-04-24T00:00:00').getTime();
+
+// Atualizando o contador a cada segundo
+const interval = setInterval(() => {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    // Calculando dias, horas, minutos e segundos restantes
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Exibindo o contador
+    document.getElementById('countdown').innerHTML = `${days} dias ${hours} horas ${minutes} minutos ${seconds} segundos`;
+
+    // Verificando se a contagem regressiva terminou
+    if (distance < 0) {
+        clearInterval(interval);
+        document.getElementById('countdown').innerHTML = 'EXPIRADO';
+    }
+}, 1000);
+</script>
+
+</body>
 </html>
